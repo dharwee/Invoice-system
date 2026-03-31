@@ -1,0 +1,264 @@
+[
+    {
+      "id": 1,
+      "filename": "acme_corp_invoice_march_2024.pdf",
+      "s3_key": "invoices/2024/03/acme_corp_invoice_march_2024.pdf",
+      "status": "PROCESSED",
+      "prompt_version_id": 3,
+      "uploaded_at": "2024-03-15T09:12:34.000Z",
+      "processed_at": "2024-03-15T09:12:47.000Z",
+      "processing_time_ms": 13240,
+      "extraction_path": "text",
+      "extracted_data": {
+        "id": 101,
+        "document_id": 1,
+        "vendor_name": "Acme Corporation Ltd.",
+        "vendor_address": "450 Innovation Drive, San Francisco, CA 94105, USA",
+        "vendor_email": "billing@acmecorp.com",
+        "vendor_tax_id": "US-987654321",
+        "invoice_number": "INV-2024-00423",
+        "invoice_date": "2024-03-10",
+        "due_date": "2024-04-09",
+        "purchase_order": "PO-88231",
+        "currency": "USD",
+        "subtotal": 4850.00,
+        "tax_rate": 8.5,
+        "tax_amount": 412.25,
+        "total_amount": 5262.25,
+        "amount_paid": 0.00,
+        "amount_due": 5262.25,
+        "payment_terms": "Net 30",
+        "payment_method": "Bank Transfer",
+        "bank_account": "****4892",
+        "notes": "Please reference invoice number on all payments.",
+        "confidence_score": 0.97,
+        "line_items": [
+          {
+            "id": 1001,
+            "description": "Enterprise SaaS License — Q1 2024",
+            "quantity": 1,
+            "unit": "license",
+            "unit_price": 2500.00,
+            "discount": 0.00,
+            "amount": 2500.00
+          },
+          {
+            "id": 1002,
+            "description": "Professional Services — API Integration (20 hrs @ $115/hr)",
+            "quantity": 20,
+            "unit": "hours",
+            "unit_price": 115.00,
+            "discount": 0.00,
+            "amount": 2300.00
+          },
+          {
+            "id": 1003,
+            "description": "Priority Support Add-on — March 2024",
+            "quantity": 1,
+            "unit": "month",
+            "unit_price": 50.00,
+            "discount": 0.00,
+            "amount": 50.00
+          }
+        ]
+      },
+      "validation_errors": [],
+      "field_confidence": {
+        "vendor_name": 0.99,
+        "invoice_number": 0.99,
+        "invoice_date": 0.98,
+        "due_date": 0.97,
+        "currency": 0.99,
+        "total_amount": 0.99,
+        "tax_amount": 0.98,
+        "subtotal": 0.97,
+        "line_items": 0.95
+      }
+    },
+    {
+      "id": 2,
+      "filename": "scanned_vendor_invoice_feb2024.pdf",
+      "s3_key": "invoices/2024/02/scanned_vendor_invoice_feb2024.pdf",
+      "status": "PROCESSED_WITH_ERRORS",
+      "prompt_version_id": 3,
+      "uploaded_at": "2024-03-20T14:05:11.000Z",
+      "processed_at": "2024-03-20T14:05:39.000Z",
+      "processing_time_ms": 28150,
+      "extraction_path": "image",
+      "extracted_data": {
+        "id": 102,
+        "document_id": 2,
+        "vendor_name": "Sunrise Office Supplies",
+        "vendor_address": "12 Commerce Street, Austin, TX 78701, USA",
+        "vendor_email": null,
+        "vendor_tax_id": null,
+        "invoice_number": "SOS-7741",
+        "invoice_date": "2024-02-22",
+        "due_date": null,
+        "purchase_order": null,
+        "currency": "USD",
+        "subtotal": 1245.50,
+        "tax_rate": 6.25,
+        "tax_amount": 77.84,
+        "total_amount": 1323.34,
+        "amount_paid": 0.00,
+        "amount_due": 1323.34,
+        "payment_terms": null,
+        "payment_method": "Check",
+        "bank_account": null,
+        "notes": "Handwritten note detected: 'Expedite shipping if possible'",
+        "confidence_score": 0.71,
+        "line_items": [
+          {
+            "id": 1004,
+            "description": "Printer Paper A4 - 80gsm (Case of 10 reams)",
+            "quantity": 5,
+            "unit": "case",
+            "unit_price": 89.50,
+            "discount": 0.00,
+            "amount": 447.50
+          },
+          {
+            "id": 1005,
+            "description": "Ballpoint Pens Black Box x50",
+            "quantity": 10,
+            "unit": "box",
+            "unit_price": 14.00,
+            "discount": 0.00,
+            "amount": 140.00
+          },
+          {
+            "id": 1006,
+            "description": "Ergonomic Office Chair - Model EC-200",
+            "quantity": 2,
+            "unit": "unit",
+            "unit_price": 329.00,
+            "discount": 0.00,
+            "amount": 658.00
+          }
+        ]
+      },
+      "validation_errors": [
+        {
+          "id": 201,
+          "document_id": 2,
+          "field": "due_date",
+          "error_type": "MISSING_FIELD",
+          "message": "Due date could not be extracted from the scanned document. Field was blank or obscured.",
+          "confidence": null
+        },
+        {
+          "id": 202,
+          "document_id": 2,
+          "field": "vendor_email",
+          "error_type": "MISSING_FIELD",
+          "message": "Vendor email address not found on invoice.",
+          "confidence": null
+        },
+        {
+          "id": 203,
+          "document_id": 2,
+          "field": "vendor_tax_id",
+          "error_type": "MISSING_FIELD",
+          "message": "Vendor tax ID / EIN not present on document.",
+          "confidence": null
+        }
+      ],
+      "field_confidence": {
+        "vendor_name": 0.82,
+        "invoice_number": 0.88,
+        "invoice_date": 0.79,
+        "due_date": 0.00,
+        "currency": 0.95,
+        "total_amount": 0.76,
+        "tax_amount": 0.72,
+        "subtotal": 0.74,
+        "line_items": 0.68
+      }
+    },
+    {
+      "id": 3,
+      "filename": "globaltech_services_jan2024.pdf",
+      "s3_key": "invoices/2024/01/globaltech_services_jan2024.pdf",
+      "status": "PROCESSED",
+      "prompt_version_id": 2,
+      "uploaded_at": "2024-02-01T08:33:00.000Z",
+      "processed_at": "2024-02-01T08:33:16.000Z",
+      "processing_time_ms": 16020,
+      "extraction_path": "text",
+      "extracted_data": {
+        "id": 103,
+        "document_id": 3,
+        "vendor_name": "GlobalTech Services GmbH",
+        "vendor_address": "Friedrichstraße 91, 10117 Berlin, Germany",
+        "vendor_email": "invoices@globaltech.de",
+        "vendor_tax_id": "DE-299374821",
+        "invoice_number": "GT-2024-0118",
+        "invoice_date": "2024-01-18",
+        "due_date": "2024-02-17",
+        "purchase_order": "PO-EU-44002",
+        "currency": "EUR",
+        "subtotal": 12400.00,
+        "tax_rate": 19.0,
+        "tax_amount": 2356.00,
+        "total_amount": 14756.00,
+        "amount_paid": 5000.00,
+        "amount_due": 9756.00,
+        "payment_terms": "Net 30",
+        "payment_method": "SEPA Bank Transfer",
+        "bank_account": "DE89 3704 0044 0532 0130 00",
+        "notes": "Partial payment of EUR 5,000 received on 2024-01-25. Remaining balance due by due date.",
+        "confidence_score": 0.96,
+        "line_items": [
+          {
+            "id": 1007,
+            "description": "Cloud Infrastructure Setup & Migration — Phase 1",
+            "quantity": 1,
+            "unit": "project",
+            "unit_price": 8000.00,
+            "discount": 0.00,
+            "amount": 8000.00
+          },
+          {
+            "id": 1008,
+            "description": "Senior DevOps Engineer — Contract (40 hrs @ $85/hr)",
+            "quantity": 40,
+            "unit": "hours",
+            "unit_price": 85.00,
+            "discount": 0.00,
+            "amount": 3400.00
+          },
+          {
+            "id": 1009,
+            "description": "Security Audit & Penetration Testing Report",
+            "quantity": 1,
+            "unit": "report",
+            "unit_price": 700.00,
+            "discount": 0.00,
+            "amount": 700.00
+          },
+          {
+            "id": 1010,
+            "description": "Monitoring & Alerting Configuration",
+            "quantity": 1,
+            "unit": "service",
+            "unit_price": 300.00,
+            "discount": 0.00,
+            "amount": 300.00
+          }
+        ]
+      },
+      "validation_errors": [],
+      "field_confidence": {
+        "vendor_name": 0.99,
+        "invoice_number": 0.99,
+        "invoice_date": 0.98,
+        "due_date": 0.98,
+        "currency": 0.99,
+        "total_amount": 0.97,
+        "tax_amount": 0.96,
+        "subtotal": 0.97,
+        "line_items": 0.94
+      }
+    }
+  ]
