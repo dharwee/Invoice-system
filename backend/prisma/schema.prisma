@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Document {
+  id               Int            @id @default(autoincrement())
+  filename         String
+  status           String         @default("pending")
+  filePath         String         @map("file_path")
+  rawText          String?        @map("raw_text")
+  processingTimeMs Int?           @map("processing_time_ms")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  processedAt      DateTime?      @map("processed_at")
+  extractedData    ExtractedData?
+
+  @@map("documents")
+}
+
+model ExtractedData {
+  id               Int            @id @default(autoincrement())
+  documentId       Int            @unique @map("document_id")
+  vendorName       String?        @map("vendor_name")
+  invoiceNumber    String?        @map("invoice_number")
+  invoiceDate      String?        @map("invoice_date")
+  currency         String?
+  totalAmount      Float?         @map("total_amount")
+  taxAmount        Float?         @map("tax_amount")
+  confidenceScore  Float          @default(0) @map("confidence_score")
+  validationErrors Json           @default("[]") @map("validation_errors")
+  promptVersionId  Int?           @map("prompt_version_id")
+  document         Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  promptVersion    PromptVersion? @relation(fields: [promptVersionId], references: [id])
+  lineItems        LineItem[]
+
+  @@map("extracted_data")
+}
+
+model LineItem {
+  id              Int           @id @default(autoincrement())
+  extractedDataId Int           @map("extracted_data_id")
+  description     String?
+  quantity        Float?
+  unitPrice       Float?        @map("unit_price")
+  lineTotal       Float?        @map("line_total")
+  extractedData   ExtractedData @relation(fields: [extractedDataId], references: [id], onDelete: Cascade)
+
+  @@map("line_items")
+}
+
+model PromptVersion {
+  id            Int             @id @default(autoincrement())
+  version       String          @unique
+  promptText    String          @map("prompt_text")
+  isActive      Boolean         @default(false) @map("is_active")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  extractedData ExtractedData[]
+
+  @@map("prompt_versions")
+}
