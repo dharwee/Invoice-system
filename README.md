@@ -1,4 +1,4 @@
-# Document Intelligence System
+# Invoice Intelligence System
 
 Full-stack application for uploading invoice PDFs, extracting structured fields, tracking processing quality, handling validation errors, and managing prompt versions.
 
@@ -33,23 +33,26 @@ Full-stack application for uploading invoice PDFs, extracting structured fields,
 
 ```mermaid
 flowchart LR
-  U[User] --> F[Frontend: Next.js]
-  F -->|REST JSON / multipart| B[Backend: Express API]
-  B --> P[(PostgreSQL via Prisma)]
+  U[User] --> F[Frontend Next.js]
+  F -->|REST JSON| B[Backend Express API]
+  B --> P[(PostgreSQL Prisma)]
   B --> S3[(AWS S3)]
   B --> OAI[OpenAI API]
 
-  subgraph FE[Frontend Domains]
+  subgraph Frontend_Domains
     D1[Dashboard]
-    D2[Invoice List + Upload]
+    D2[Invoice List Upload]
     D3[Error Report]
     D4[Prompt Management]
   end
 
-  F --- FE
-  D2 -->|files[]| B
-  D3 -->|manual patch| B
-  D4 -->|create/activate| B
+  F -.includes.-> D1
+  F -.includes.-> D2
+  F -.includes.-> D3
+  F -.includes.-> D4
+  D2 -->|upload files| B
+  D3 -->|patch document| B
+  D4 -->|manage prompts| B
 ```
 
 ## Data Model (Prisma)
@@ -223,7 +226,7 @@ sequenceDiagram
   participant AI as OpenAI
   participant DB as PostgreSQL
 
-  FE->>API: POST /documents (files[])
+  FE->>API: POST /documents (multipart files)
   API->>S3: upload PDF
   API->>DB: create Document(status=pending)
   API->>EXT: processDocument(documentId)
