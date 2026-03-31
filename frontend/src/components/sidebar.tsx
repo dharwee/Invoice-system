@@ -26,7 +26,7 @@ export function Sidebar({
     <aside className="sticky top-4 h-[calc(100vh-2rem)] border-r border-white/5 bg-[#0C0D10] p-4">
       <div className="mb-8 flex items-start justify-between">
         <div className={collapsed ? "hidden" : "block"}>
-          <p className="text-2xl font-semibold text-[#A9A4FF]">InvoiceIQ</p>
+          <p className="text-2xl font-semibold text-[#A9A4FF]">InvoicePQ</p>
         </div>
         <button
           type="button"
